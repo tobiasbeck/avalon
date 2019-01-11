@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+      "outDir": "./lib",
+      "allowJs": true,
+      "target": "es2017",
+      "module": "CommonJS",
+      "types": ["node", "socket.io"]
+  },
+  "include": [
+    "./custom.d.ts",
+    "./global.d.ts",
+    "./src/**/*"
+  ]
+}

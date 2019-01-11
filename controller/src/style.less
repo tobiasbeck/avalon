@@ -1,0 +1,140 @@
+.text-cartoon {
+  border-image-slice: 118 89 99 89;
+  border-image-width: 30px 30px 30px 30px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-width: 30px;
+  border-style: solid;
+  border-image-source:url('./assets/text-border-cartoon.png');
+  background-image: url('./assets/text-bg-cartoon.png');
+  background-size:cover;
+  background-clip: padding-box;
+}
+
+.text-roll {
+  border-image-slice: 169 125 190 108;
+  border-image-width: 30px 30px 30px 30px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-width: 30px;
+  border-style: solid;
+  transition: max-height 0.4s;
+  max-height:2000px;
+  border-image-source:url('./assets/text-border-roll.png');
+  background-image: url('./assets/text-bg-roll.png');
+  background-clip: padding-box;
+}
+
+.text-pergament {
+  background-image: url('./assets/text-bg.png');
+  background-size:contain;
+  background-clip: padding-box;
+  border-width:30px;
+  border-style: solid;
+  border-image-slice: 161 129 136 143;
+  border-image-width: 30px 30px 30px 30px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-image-source:url('./assets/text-border.png');
+}
+
+.game-title {
+  font-family: 'Troll Bait';
+}
+
+.center-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  .center-inner{
+    padding:20px;
+    max-width: 600px;
+    flex-grow: 1;
+  }
+  
+  .btn-outline-secondary:not(:hover) {
+      background-color: rgb(240,240,240);
+    }
+  .version {
+    position: fixed;
+    right: 12vw;
+    bottom: 6vw;
+  }
+  .readable-font {
+    color: black;
+      font-size: 1.2em;
+      font-family: 'PT Mono', Arial; 
+    }
+}
+
+.btn {
+  &.btn-wrap {
+    white-space: normal;
+  }
+}
+.player-list-container {
+  font-family: 'Adolphus Serif';
+  margin-top:4px;
+  margin-bottom: 4px;
+  .player-list-title {
+    font-size:1.2em;
+    font-weight: bold;
+    margin-bottom:0px;
+  }
+  .player-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    &.single {
+      justify-content: flex-start;
+    }
+    .component-player{
+      font-size:1.2em;
+      margin:5px;
+      margin-left: 0px;
+      margin-right:12px;
+    }
+  }
+}
+
+.state-top {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Adolphus Serif';
+  overflow:hidden;
+  padding:12px;
+  font-size:1em;
+
+  .title {
+    font-size:2em;
+    font-family: 'Anir';
+  }
+
+  .sub-title {
+    font-size:1.3em;
+    color: #6c757d;
+  }
+
+  .state-icon {
+    max-height: 20vh;
+  }
+  .description {
+    overflow: auto;
+    font-family: 'Adolphus Serif';
+    font-size: 1.2em;
+    h3 {
+      font-size: 1.1em;
+    }
+
+    ul {
+      padding-left: 0px;
+      list-style: none;
+      .name {
+        font-weight: bold;
+      }
+    }
+  }
+}
