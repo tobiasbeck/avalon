@@ -8,6 +8,6 @@ cd ../server;
 echo "Building Server";
 npm run build;
 echo "Restart server";
-pm2 restart jh-server;
+pm2 restart avalon-server;
 
 echo "DONE!";
