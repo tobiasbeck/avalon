@@ -31,7 +31,7 @@ export default class Game  extends EventEmitter{
     this.lastStateResult = 'false';
     this.fails = 0;
     this.size = undefined;
-    this.questWinners = ['good','good', 'good'];
+    this.questWinners = [];
     this.specialRoles = [];
     this.players = [];
     this.rejoinIds = {};
@@ -86,7 +86,7 @@ export default class Game  extends EventEmitter{
 
   join (socket, data): Player | false {
     if (this.players.length < 10) {
-      let player = new Player(data.name, socket, 0);
+      let player = new Player(data.name, socket, 0, false, data.knightName, data.gender);
       player.rejoinId = shortid.generate();
       this.rejoinIds[player.rejoinId] = player;
       let id = this.players.push(player);

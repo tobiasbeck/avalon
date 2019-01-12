@@ -1,6 +1,12 @@
 <template>
   <span :class="{['component-player']: true, ['player-inline']: inline}">
-    <img v-if="!hideIcon" :src="'/players/' + player.id + '.png'"> <span :class="{['text-muted']:mutedText, ['text-good']:textStyle == 'good', ['text-evil']:textStyle == 'evil'}" v-if="!hideName">{{player.name}}</span>
+    <img v-if="!hideIcon" :src="'/players/' + player.id + '.png'"> 
+    <span :class="{
+      ['text-muted']:mutedText,
+      ['text-good']:textStyle == 'good', 
+      ['text-evil']:textStyle == 'evil',
+      ['text-success']:textStyle == 'success',
+      ['text-danger']:textStyle == 'danger'}" v-if="!hideName">{{player.name}}</span>
   </span>
 </template>
 

@@ -1,4 +1,4 @@
-import { Character } from "./types";
+import { Character, KnightName } from "./types";
 
 export const CHARACTERS: Array<Character> = [
   {
@@ -213,4 +213,34 @@ export const GAME_SIZES = {
       }
     ]
   }
+}
+
+export const KNIGHT_NAMES:{m: Array<KnightName>, f: Array<KnightName>} = {
+  m: [
+    { prefix: 'Knight' },
+    { prefix: 'Squire' },
+    { prefix: 'Prince' },
+    { prefix: 'Landgrave' },
+    { prefix: 'Viscount' },
+    { prefix: 'Lord' },
+    { prefix: 'Alderman' },
+    { prefix: 'Bishop' },
+    { prefix: 'Earl' },
+    { prefix: 'Duke' },
+    { prefix: 'Serf' },
+    { prefix: 'Baron' },
+    { prefix: 'Baronet' },
+  ],
+  f: [
+    { prefix: 'Empress' },
+    { prefix: 'Queen' },
+    { prefix: 'Princess' },
+    { prefix: 'Landgravine' },
+    { prefix: 'Viscountess' },
+    { prefix: 'Lady' },
+    { prefix: 'Countess' },
+    { prefix: 'Duchess' },
+    { prefix: 'Baroness' },
+    { prefix: 'Baronetess' },
+  ]
 }

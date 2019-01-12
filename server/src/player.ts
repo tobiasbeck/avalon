@@ -1,5 +1,5 @@
 import { Character, GameState } from './types';
-import { CHARACTERS } from './const';
+import { CHARACTERS, KNIGHT_NAMES } from './const';
 import { EventEmitter } from "events";
 import Game from "./game";
 import StrictEventEmitter from 'strict-event-emitter-types';
@@ -20,9 +20,17 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
   public character: Character;
   public rejoinId: string;
 
-  constructor (name: string, socket: SocketIO.Socket, id: number, gameLeader = false) {
+  constructor (name: string, socket: SocketIO.Socket, id: number, gameLeader = false, knightName = false, gender: 'm' | 'f' = 'm') {
     super()
     this.name = name;
+
+    if (this.name == 'Liisa' || this.name == 'Lisa') {
+      this.name = 'Hot Potatoe';
+    } else if (knightName == true) {
+      let add = this.getRandomTitle(gender);
+      this.name = add.prefix + ' ' + this.name;
+    }
+
     this.id = id;
     this.socket = socket;
     this.gameLeader = gameLeader;
@@ -111,6 +119,12 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
     this.send('game_players', game.players);
     this.send('settings-characters', game.specialRoles);
     this.sendGameState(game.state);
+  }
+
+  getRandomTitle(gender: 'm' | 'f') {
+    let names = KNIGHT_NAMES[gender];
+    let nameId = Math.floor(Math.random() * (names.length - 0)) + 0;
+    return names[nameId];
   }
 
 

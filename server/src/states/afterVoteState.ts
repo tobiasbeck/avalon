@@ -34,7 +34,7 @@ export class AfterVoteState extends OkState {
     let data = YesNoState.lastResult;
     console.log(data);
     for(let vote of data) {
-      this.playerStyle[vote.player.id] = (vote.vote == 'yes') ? 'good' : 'evil';
+      this.playerStyle[vote.player.id] = (vote.vote == 'yes') ? 'success' : 'danger';
     }
   }
 }

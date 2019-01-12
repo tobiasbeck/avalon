@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="player-list" v-if="playerList.length > 0">
-        <b-button block v-for="player in playerList" @click="choose(player)" :key="player.id" :variant="choosen.includes(player.id)? 'primary' : 'secondary'"><Player :player="player" /></b-button>
+        <b-button block v-for="player in playerList" :disabled="!isKing" @click="choose(player)" :key="player.id" :variant="choosen.includes(player.id)? 'bronze' : 'secondary'"><Player :player="player" /></b-button>
       </div>
     </div>
     <div class="assassin-state-bottom">

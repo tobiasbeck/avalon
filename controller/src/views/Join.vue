@@ -6,6 +6,7 @@
     <b-alert show variant="info" v-if="connected === false">Waiting for connection...</b-alert>
     <b-form-input placeholder="Enter Game ID" size="lg" class="readable-font" v-model="gameIDUp" maxlength="4" ></b-form-input>
     <b-form-input placeholder="Enter your Name" size="lg" v-model="name" :disabled="gameID.length < 4" ></b-form-input>
+    <knight-name :enabled.sync="medievalName" :gender.sync="gender" />
     <b-btn variant="bronze" @click="login()" size="lg" :disabled="!canJoin" block>Join</b-btn>
     <b-btn variant="link" @click="back()" size="lg" :disabled="!connected" block>Back</b-btn>
     </div>
@@ -13,12 +14,18 @@
 </template>
 
 <script>
+import KnightName from '../components/KnightName';
 export default {
+  components: {
+    KnightName
+  },
   data () {
     return {
       gameID: '',
       name: '',
       error: false,
+      medievalName: false,
+      gender: 'm'
     }
   },
   computed: {
@@ -56,6 +63,8 @@ export default {
       this.$socket.emit('game-join', {
         game: this.gameIDUp,
         name: this.name,
+        knightName: this.medievalName,
+        gender: this.gender
       }, (result) => {
         if (!result.success) {
           this.error = result.message

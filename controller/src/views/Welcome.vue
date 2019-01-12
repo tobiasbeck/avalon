@@ -16,6 +16,7 @@
       </div>
       <div v-if="mode == 'create_player'" key="create_player_btns">
       <b-form-input style="margin-bottom: 5%" placeholder="Enter your name" size="lg" v-model="name" ></b-form-input>
+      <knight-name :enabled.sync="medievalName" :gender.sync="gender" />
       <b-btn variant="bronze" @click="create(false)" size="lg" :disabled="!connected" block>Create the game</b-btn>
       <b-btn variant="link" @click="mode='welcome'" size="lg" block>Back</b-btn>
       </div>
@@ -26,13 +27,19 @@
 </template>
 
 <script>
+import KnightName from '../components/KnightName'
 export default {
+  components: {
+    KnightName
+  },
   data () {
     return {
       gameID: '',
       name: '',
       error: false,
       mode: 'welcome',
+      medievalName: false,
+      gender: 'm'
     }
   },
   computed: {
@@ -69,7 +76,7 @@ export default {
       if (gamefield == false) {
         this.$store.commit("SET_PLAYER_LEADER", true);
       }
-      this.$socket.emit('game-create', {gamefield: gamefield, name: this.name}, (result) => {
+      this.$socket.emit('game-create', {gamefield: gamefield, name: this.name, knightName: this.medievalName, gender: this.gender}, (result) => {
         this.$store.commit('SET_GAME_ID', result.id);
         if (result.player !== false) {
           this.$store.dispatch('after_login', result.me);

@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
     });
     let result: false | Player;
     if (data.gamefield !== true) {
-      result = game.join(socket, {name: data.name});
+      result = game.join(socket, data);
       if((<Player>result).id !== undefined) {
         (<Player>result).gameLeader = true;
         rejoinIds[(<Player>result).rejoinId] = {

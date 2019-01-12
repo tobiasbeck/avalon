@@ -42,3 +42,8 @@ export enum GameState {
   ASSASSIN = 'assassin',
   VICTORY = 'victory'
 };
+
+export type KnightName = {
+  prefix?: string,
+  suffix?: string
+};

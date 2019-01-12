@@ -1,6 +1,6 @@
 {
-  "name": "jhcontroller",
-  "version": "0.3.2",
+  "name": "avalon-game",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

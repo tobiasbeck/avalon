@@ -10,16 +10,18 @@ export abstract class OkState extends State {
   protected alreadyOk: Array<number>;
   protected messages: {player: string, screen: string, playerList: string, after: string};
   protected playerList: Array<Player>;
-  protected playerStyle: Array<'good' | 'evil'>;
+  protected playerStyle: Array<'good' | 'evil' | 'success' | 'danger'>;
+  protected onlyLeader: boolean;
 
   constructor (game: Game) {
     super(game, true);
     this.oks = 0;
-    //this.maxOks = this.game.players.length;
-    this.maxOks = 1;
+    this.maxOks = this.game.players.length;
+    //this.maxOks = 1;
     this.alreadyOk = [];
     this.playerList = [];
     this.playerStyle = [];
+    this.onlyLeader = false;
     this.messages = {player: '', screen: '', playerList: '', after: ''}
     this.type = 'ok';
     this.updateAnswers();
