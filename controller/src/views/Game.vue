@@ -1,9 +1,9 @@
 <template>
   <div class="view-game">
-    <lobby v-if="gameState == 'lobby'"/>
+    <lobby v-if="gameStateType == 'lobby'"/>
     <my-character @close="showRole = false" v-if="showRole == true" />
-    <game-header @open-role="openRole()" v-if="gameState !== 'lobby'" />
-    <div class="game-inner-wrapper" v-if="gameState !== 'lobby'">
+    <game-header @open-role="openRole()" v-if="gameStateType !== 'lobby'" />
+    <div class="game-inner-wrapper" v-if="gameStateType !== 'lobby'">
     <div class="game-inner">
     <ok-state v-if="gameStateType == 'ok'" :key="gameStateId" />
     <yes-no-state v-if="gameStateType == 'yesNo'" :key="gameStateId" />
@@ -48,11 +48,10 @@ export default {
   },
   computed: {
     gameState () {
-      console.log(this.$store.state.game.state);
       if (this.$store.state.game.state !== null && this.$store.state.game.state.state !== null) {
         return this.$store.state.game.state.state;
       }
-      return 'lobby';
+      return 'unknown';
     },
     gameStateType () {
       if (this.$store.state.game.state !== null && this.$store.state.game.state.type !== null) {

@@ -45,7 +45,7 @@ export class ChooseState extends State {
   }
 
   toJSON () {
-    return {
+    let data = {
       id: this.id,
       type: this.type,
       state: this.state,
@@ -56,6 +56,7 @@ export class ChooseState extends State {
       choosen: this.choosen,
       messages: this.messages
     };
+    return Object.assign({}, super.toJSON(), data);
   }
 
   updateAnswers() {

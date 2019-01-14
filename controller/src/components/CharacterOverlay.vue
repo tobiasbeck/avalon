@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     characters () {
-      return this.$store.state.settings.allRoles.filter(val => val.default !== true);
+      return this.$store.state.game.state.allRoles.filter(val => val.default !== true);
     },
     me () {
       return this.$store.state.player

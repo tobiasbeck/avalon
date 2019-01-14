@@ -29,7 +29,16 @@ export abstract class State extends (EventEmitter as { new(): StrictEventEmitter
     }
   }
   abstract get answers();
-  abstract toJSON();
+
+  toJSON(): any {
+    return {
+      id: this.id,
+      type: this.type,
+      state: this.state,
+      icon: this.icon,
+      title: this.title
+    };
+  }
   abstract init ();
   yes (player:Player) {}
   no (player:Player) {}

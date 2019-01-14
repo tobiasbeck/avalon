@@ -3,6 +3,7 @@
     <div class="text-roll welcome-text center-inner">
     <h1 class="game-title">AVALON</h1>
     <b-alert show variant="danger" v-if="error">{{ error }}</b-alert>
+    <b-alert show variant="bronze" v-if="stop">The game was ended early by the leader! Sorry :/</b-alert>
     <b-alert show variant="bronze" v-if="connected === false">Waiting for connection...</b-alert>
     <transition name="fade" mode="out-in">
       <div v-if="mode == 'welcome'" key="welcome_btns">
@@ -39,8 +40,13 @@ export default {
       error: false,
       mode: 'welcome',
       medievalName: false,
-      gender: 'm'
+      gender: 'm',
+      stop: false
     }
+  },
+  created () {
+    console.log(this.$route);
+    this.stop = (this.$route.params.stop != undefined) ? this.$route.params.stop : false;
   },
   computed: {
     gameIDUp: {

@@ -23,11 +23,16 @@
     </div>
   </div>
   <div class="lobby-bottom">
-    <b-button variant="bronze" @click="startGame()" v-if="me.gameLeader == true" size="lg" block :disabled="!enableStart">
+    <b-button-group>
+    <b-button variant="bronze" @click="startGame()" v-if="me.gameLeader == true" size="lg"  :disabled="!enableStart">
       <span v-if="players.length >= requiredPlayers && enableStart && me.gameLeader == true">Start</span>
         <span v-if="players.length < requiredPlayers" >Minimum {{requiredPlayers}}
         players</span>
          ({{players.length}} / {{maximumPlayers}} Players)</b-button>
+         <b-button variant="evil" @click="endGame()" v-if="me.gameLeader == true" size="lg" >
+          Exit
+          </b-button>
+    </b-button-group>
   </div>
 </div>
 </template>
@@ -36,6 +41,7 @@
 import CharacterOverlay from '../components/CharacterOverlay';
 import { TweenLite } from 'gsap';
 import {IsScreenMixin} from '../mixins/IsScreenMixin.js';
+import {StateMixin} from '../mixins/StateMixin.js'
 import Player from '../components/Player'
 export default {
   components: {
@@ -49,7 +55,7 @@ export default {
       charOverlay: false
     }
   },
-  mixins: [IsScreenMixin],
+  mixins: [IsScreenMixin, StateMixin],
   computed: {
     gameId () {
       return this.$store.state.game.id
@@ -71,7 +77,7 @@ export default {
       return this.$store.state.player
     },
     enabledRoles () {
-      return this.$store.state.settings.enabledRoles
+      return this.gameState.enabledRoles
     }
   },
   methods: {
@@ -80,11 +86,16 @@ export default {
       this.$socket.emit('game-start');
       //this.$store.dispatch('set_app_state', 'game')
     },
+    endGame () {
+      //this.$store.commit('SET_VARIANTS', this.variants);
+      this.$socket.emit('game-end');
+      //this.$store.dispatch('set_app_state', 'game')
+    },
     openCharacters () {
       this.charOverlay = true;
     },
     toggleRole(role) {
-      this.$socket.emit('settings-character', {character: role});
+      this.$socket.emit('player-choose', {character: role});
     }
   }
 }

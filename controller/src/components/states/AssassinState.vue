@@ -75,9 +75,6 @@ export default {
     choose (player) {
       if (this.isKing) {
         let newC = this.choosen.splice(0);
-        console.log(newC);
-        console.log(this.totalNeeded);
-        console.log(newC < this.totalNeeded);
         if (!newC.includes(player.id)) {
           if (newC.length < this.totalNeeded) {
             newC.push(player.id);

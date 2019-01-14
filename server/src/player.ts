@@ -8,7 +8,8 @@ import { State } from './states/state';
 interface PlayerEvents {
   ['player-yes']:void,
   ['player-no']: void,
-  ['player-choose']: any
+  ['player-choose']: any,
+  ['disconnect']: void
 }
 
 export default class Player extends (EventEmitter as { new(): StrictEventEmitter<EventEmitter, PlayerEvents> }) {
@@ -19,10 +20,12 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
   public role: string;
   public character: Character;
   public rejoinId: string;
+  public connected: boolean;
 
   constructor (name: string, socket: SocketIO.Socket, id: number, gameLeader = false, knightName = false, gender: 'm' | 'f' = 'm') {
     super()
     this.name = name;
+    this.connected = true;
 
     if (this.name == 'Liisa' || this.name == 'Lisa') {
       this.name = 'Hot Potatoe';
@@ -42,6 +45,8 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
   setEvents () {
     this.socket.on('disconnect', () => {
       this.unsetEvents();
+      this.connected = false;
+      this.emit('disconnect');
     });
 
     this.socket.on('player-yes', () => {
@@ -102,6 +107,7 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
         currentAccepted: (game.state != undefined) ? game.state.answers : 0
       }
     }
+    this.connected = true;
     this.setEvents();
     this.socket.emit('rejoinReturn', pack);
   }
@@ -115,9 +121,7 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
   }
 
   initialize(game: Game) {
-    this.send('settings-allroles', CHARACTERS);
     this.send('game_players', game.players);
-    this.send('settings-characters', game.specialRoles);
     this.sendGameState(game.state);
   }
 

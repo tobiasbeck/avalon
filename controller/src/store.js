@@ -60,12 +60,6 @@ export default new Vuex.Store({
     SET_CONNECTED (state, value) {
       state.connected = value
     },
-    SET_ALL_ROLES (state, value) {
-      state.settings.allRoles = value
-    },
-    SOCKET_SETTINGS_CHARACTERS (state, value) {
-      state.settings.enabledRoles = value
-    },
     SOCKET_GAME_PLAYERS (state, value) {
       state.game.players = value
     },
@@ -82,7 +76,7 @@ export default new Vuex.Store({
       Vue.set(state.game, 'questWinners', value)
     },
     SET_GAME_FAILS (state, value) {
-      state.game.fails = value;
+      state.game.fails = value
     }
   },
   actions: {
@@ -104,7 +98,6 @@ export default new Vuex.Store({
     after_login (context, message) {
       context.commit('SET_PLAYER', message)
       let storage = window.localStorage
-      console.log(message);
       storage.setItem('rejoin', message.rejoinId)
     },
     socket_rejoinReturn (context, result) {
@@ -114,9 +107,6 @@ export default new Vuex.Store({
       if (result.player) {
         context.commit('SET_PLAYER', result.player)
       }
-    },
-    socket_settingsAllroles (context, value) {
-      context.commit('SET_ALL_ROLES', value)
     },
     socket_endGame (context, value) {
       let storage = window.localStorage

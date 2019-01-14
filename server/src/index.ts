@@ -53,7 +53,6 @@ io.on('connection', (socket) => {
           gameId: id
         }
       }
-      console.log(rejoinIds);
     }
     console.log('GAME: ' + id)
     callback({id: id, me: result});

@@ -89,7 +89,6 @@ export class AfterRoleState extends OkState {
   preText () {
     let text = '<h2 class="sub-title">What other roles get reported:</h2>';
     text += '<ul>';
-    console.log(this.game.specialRoles);
     for (let char of this.game.specialRoles) {
       text += roleMessages[char];
     }

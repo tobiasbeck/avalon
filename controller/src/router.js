@@ -11,22 +11,22 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Welcome',
+      name: 'index',
       component: Welcome
     },
     {
       path: '/join',
-      name: 'Join',
+      name: 'join',
       component: Join
     },
     {
       path: '/game',
-      name: 'Game',
+      name: 'game',
       component: Game
     },
     {
       path: '/end',
-      name: 'End',
+      name: 'end',
       component: End
     }
   ]

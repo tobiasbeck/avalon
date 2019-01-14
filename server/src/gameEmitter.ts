@@ -50,8 +50,10 @@ export class GameEmitter extends (EventEmitter as { new(): StrictEventEmitter<Ev
       this.emit('settings-character', data);
     });
     this.socket.on('game-start', () => {
-      console.log('start');
       this.emit('game-start');
+    });
+    this.socket.on('game-end', () => {
+      this.emit('game-end');
     });
   }
 }

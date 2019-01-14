@@ -44,7 +44,7 @@ export class AssassinState extends State {
   }
 
   toJSON () {
-    return {
+    let res = {
       id: this.id,
       type: this.type,
       state: this.state,
@@ -56,6 +56,7 @@ export class AssassinState extends State {
       choosen: this.choosen,
       messages: this.messages
     };
+    return Object.assign({}, super.toJSON(), res);
   }
 
   getAssassinPlayer() {

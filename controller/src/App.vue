@@ -10,8 +10,8 @@ export default {
     this.$store.commit('SET_SOCKET', this.$socket)
   },
   sockets: {
-    endGame() {
-      this.$router.push('/end');
+    gameExit() {
+      this.$router.push({name: 'index', params: { stop: true }});
     },
     noGame() {
       this.$router.push('/');

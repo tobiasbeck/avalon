@@ -1,3 +1,4 @@
+import { LobbyState } from './states/lobbyState';
 import { StateFactory } from './stateFactory';
 import { State } from './states/state';
 import Player from "./player";
@@ -25,7 +26,7 @@ export default class Game  extends EventEmitter{
     super();
     this.id = id;
     this.gameSocket = new GameEmitter(gameSocket, isScreen);
-    this.state = undefined;
+    this.state = new LobbyState(this);
     this.roundId = 0;
     this.fails = 0;
     this.lastStateResult = 'false';
@@ -40,19 +41,13 @@ export default class Game  extends EventEmitter{
 
   setGameEvents () {
     this.gameSocket.on('settings-character', (data) => {
-      if (this.specialRoles.includes(data.character)) {
-          let position = this.specialRoles.indexOf(data.character);
-          this.specialRoles.splice(position, 1);
-      } else {
-          this.specialRoles.push(data.character);
-      }
-      this.gameSocket.send('settings_characters', this.specialRoles);
+     
     });
     this.gameSocket.on('game-start', () => {
       this.startGame();
     });
     this.gameSocket.on('game-end', () => {
-      //this.endGame();
+      this.end('manual');
     });
 
     this.gameSocket.on('disconnect', (value) => {
@@ -62,13 +57,13 @@ export default class Game  extends EventEmitter{
 
   startGame () {
     this.size = GAME_SIZES[this.players.length];
+    this.state.end();
     this.distributeRoles();
     this.setState(GameState.LOBBY);
 
   }
 
   rejoin (socket, id) {
-    console.log(this.rejoinIds[id])
     if (this.rejoinIds[id] !== undefined) {
       let player = this.rejoinIds[id];
       player.unsetEvents();
@@ -119,16 +114,21 @@ export default class Game  extends EventEmitter{
         this.state.choose(player, data);
       }
     });
-  }
 
-  getSpecialRoles() {
-    let specialRoles = [];
-    for(let char of CHARACTERS) {
-      if (char.special !== false) {
-        specialRoles.push(char);
+    player.on('disconnect', () => {
+      if (this.players.length > 1) {
+        let connected = false;
+        for (let player of this.players) {
+          if (player.connected == true) {
+            connected = true;
+          }
+        }
+
+        if (connected == false) {
+          this.end('manual');
+        }
       }
-    }
-    return specialRoles;
+    });
   }
 
   publish(event, data) {
@@ -197,7 +197,10 @@ export default class Game  extends EventEmitter{
     this.gameSocket.send('game-fails', this.fails);
   }
 
-  end() {
+  end(type: string = 'normal') {
     this.emit('end');
+    if (type == 'manual') {
+      this.gameSocket.send('gameExit', '');
+    }
   }
 }
