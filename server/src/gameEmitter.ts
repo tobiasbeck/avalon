@@ -1,8 +1,9 @@
 import { EventEmitter } from "events";
 import Player from "./player";
 import StrictEventEmitter from 'strict-event-emitter-types';
-import { GameState } from "./types";
+import { GameState, GameSize } from "./types";
 import { State } from "./states/state";
+import Game from "./game";
 
 interface GameEmitterEvents {
   ['settings-character']: {character: string},
@@ -20,7 +21,7 @@ export class GameEmitter extends (EventEmitter as { new(): StrictEventEmitter<Ev
     super();
     this.socket = socket;
     this.players = [];
-    this.isGameScreen = true;
+    this.isGameScreen = isGameScreen;
     this.setSocketEvents();
   }
 
@@ -52,8 +53,22 @@ export class GameEmitter extends (EventEmitter as { new(): StrictEventEmitter<Ev
     this.socket.on('game-start', () => {
       this.emit('game-start');
     });
+    this.socket.on('disconnect', () => {
+      if (this.isGameScreen) {
+        this.emit('disconnect', '');
+      }
+    });
     this.socket.on('game-end', () => {
       this.emit('game-end');
     });
+  }
+  initialize(game: Game) {
+    if (this.isGameScreen == true) {
+      this.send('game_players', game.players);
+      this.sendGameState(game.state);
+    }
+  }
+  setSize(size: GameSize) {
+    this.send('game_size', size);
   }
 }

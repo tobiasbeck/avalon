@@ -15,11 +15,9 @@ export class VoteState extends YesNoState {
     let yesOverNo = this.votesYes / (this.votesYes + this.votesNo);
 
     let result: 'failure' | 'success' = 'failure';
-    console.log('failure');
-    console.log(this.votesYes,this.votesNo, yesOverNo);
+
     if (yesOverNo > 0.5) {
       result = 'success'; 
-      console.log('success');
     }
     this.emit('end', result);
   }

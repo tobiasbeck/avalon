@@ -1,3 +1,4 @@
+import { VictoryState } from './states/victoryState';
 import { LobbyState } from './states/lobbyState';
 import { StateFactory } from './stateFactory';
 import { State } from './states/state';
@@ -25,7 +26,6 @@ export default class Game  extends EventEmitter{
   constructor (id: string,gameSocket: SocketIO.Socket, isScreen: boolean) {
     super();
     this.id = id;
-    this.gameSocket = new GameEmitter(gameSocket, isScreen);
     this.state = new LobbyState(this);
     this.roundId = 0;
     this.fails = 0;
@@ -36,6 +36,11 @@ export default class Game  extends EventEmitter{
     this.specialRoles = [];
     this.players = [];
     this.rejoinIds = {};
+    
+    this.gameSocket = new GameEmitter(gameSocket, isScreen);
+    if (isScreen == true) {
+      this.gameSocket.initialize(this);
+    }
     this.setGameEvents();
   }
 
@@ -51,7 +56,7 @@ export default class Game  extends EventEmitter{
     });
 
     this.gameSocket.on('disconnect', (value) => {
-      //this.endGame()
+      this.end('manual');
     });
   }
 
@@ -59,6 +64,7 @@ export default class Game  extends EventEmitter{
     this.size = GAME_SIZES[this.players.length];
     this.state.end();
     this.distributeRoles();
+    this.gameSocket.setSize(this.size);
     this.setState(GameState.LOBBY);
 
   }

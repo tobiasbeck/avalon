@@ -1,11 +1,13 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{screen: isScreen}">
     <router-view/>
   </div>
 </template>
 
 <script>
+import {IsScreenMixin} from './mixins/IsScreenMixin.js';
 export default {
+  mixins: [IsScreenMixin],
   created () {
     this.$store.commit('SET_SOCKET', this.$socket)
   },
@@ -86,7 +88,7 @@ export default {
 html, body {
   height: 100%;
 }
-body:before {
+#app:before {
   content: "";
   left: 0px;
   right: 0px;

@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
     game.on('end', () => {
       delete games[game.id];
     });
-    let result: false | Player;
+    let result: false | Player = false;
     if (data.gamefield !== true) {
       result = game.join(socket, data);
       if((<Player>result).id !== undefined) {

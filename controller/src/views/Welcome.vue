@@ -8,7 +8,7 @@
     <transition name="fade" mode="out-in">
       <div v-if="mode == 'welcome'" key="welcome_btns">
       <b-btn variant="bronze" @click="join()" size="lg" :disabled="!connected" block>Join a game</b-btn>
-      <b-btn variant="outline-secondary" @click="mode='create_player'" size="lg" :disabled="!connected" block>Start a new game</b-btn>
+      <b-btn variant="outline-secondary" @click="mode='create'" size="lg" :disabled="!connected" block>Start a new game</b-btn>
       </div>
       <div v-if="mode == 'create'" key="create_btns">
       <b-btn variant="bronze" @click="mode = 'create_player'" size="lg" :disabled="!connected" block>I'm a player</b-btn>
@@ -23,7 +23,7 @@
       </div>
     </transition>
     </div>
-    <div class="version">Alpha 0.0.1</div>
+    <div class="version">Alpha 0.1.0</div>
   </div>
 </template>
 
@@ -84,10 +84,14 @@ export default {
       }
       this.$socket.emit('game-create', {gamefield: gamefield, name: this.name, knightName: this.medievalName, gender: this.gender}, (result) => {
         this.$store.commit('SET_GAME_ID', result.id);
-        if (result.player !== false) {
+        if (result.me !== false) {
           this.$store.dispatch('after_login', result.me);
         }
-        this.$router.push("/game");
+        if (gamefield == false) {
+          this.$router.push("/game");
+        } else {
+          this.$router.push("/board");
+        }
       });
     }
   }

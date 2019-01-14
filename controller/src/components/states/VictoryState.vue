@@ -1,5 +1,5 @@
 <template>
-  <div class="victory-state ">
+  <div :class="{['victory-state']: true, ['full-height']: fullHeight}">
     <div class="victory-state-top text-roll">
       <img class="victory-icon" :src="'/icons/' + gameState.icon + '.svg'">
       <span class="description" v-html="message"></span>
@@ -11,6 +11,12 @@
 import {StateMixin} from '../../mixins/StateMixin.js';
 import Player from '../Player'
 export default {
+  props: {
+    fullHeight: {
+      type: Boolean,
+      default: true
+    }
+  },
   data () {
     return {
       answered: false
@@ -36,7 +42,9 @@ export default {
 
 <style lang="less">
 .victory-state {
-  height: 100%;
+  &.full-height {
+    height: 100%;
+  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;

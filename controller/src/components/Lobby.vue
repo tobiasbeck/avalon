@@ -7,7 +7,7 @@
     <div class="lobby-head">
       <div class="lobby-head-left" v-if="isScreen">
         <p>Go to: <span class="readable-font">https://avalon.tobibeck.io</span></p>
-        <p>Enter Game ID: <span class="readable-font">{{gameId}}</span> </p>
+        <p>Game ID: <span class="readable-font">{{gameId}}</span> </p>
       </div>
       <div>
         <div class="lobby-head-right">
@@ -24,12 +24,12 @@
   </div>
   <div class="lobby-bottom">
     <b-button-group>
-    <b-button variant="bronze" @click="startGame()" v-if="me.gameLeader == true" size="lg"  :disabled="!enableStart">
-      <span v-if="players.length >= requiredPlayers && enableStart && me.gameLeader == true">Start</span>
+    <b-button variant="bronze" @click="startGame()" v-if="me.gameLeader == true || isScreen" size="lg"  :disabled="!enableStart">
+      <span v-if="players.length >= requiredPlayers && enableStart">Start</span>
         <span v-if="players.length < requiredPlayers" >Minimum {{requiredPlayers}}
         players</span>
          ({{players.length}} / {{maximumPlayers}} Players)</b-button>
-         <b-button variant="evil" @click="endGame()" v-if="me.gameLeader == true" size="lg" >
+         <b-button variant="evil" @click="endGame()" v-if="me.gameLeader == true || isScreen" size="lg" >
           Exit
           </b-button>
     </b-button-group>
@@ -61,7 +61,7 @@ export default {
       return this.$store.state.game.id
     },
     enableStart () {
-      if (this.$store.state.player.gameLeader == false) {
+      if (this.$store.state.player.gameLeader == false && this.isScreen == false) {
         return false;
       }
       if (this.players.length < this.requiredPlayers) {

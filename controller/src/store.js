@@ -22,6 +22,7 @@ export default new Vuex.Store({
       round: {},
       totalRounds: 0,
       fails: 0,
+      size: {},
       questWinners: [],
       currentAccepted: 0,
       state: {} // waitBeforeGame: Pre Game, select: Select Card, master: Answer Set Selection, wait*: Wait for Card
@@ -50,6 +51,9 @@ export default new Vuex.Store({
     },
     SET_GAME_STATE (state, value) {
       Vue.set(state.game, 'state', value)
+    },
+    SET_GAME_SIZe (state, value) {
+      Vue.set(state.game, 'size', value)
     },
     ADD_PLAYER (state, value) {
       Vue.set(state.game.players, value.id, value)
@@ -137,6 +141,9 @@ export default new Vuex.Store({
     },
     socket_playerCharacter (context, value) {
       context.commit('SET_PLAYER_ROLE', value.character)
+    },
+    socket_gameSize (context, value) {
+      context.commit('SET_GAME_SIZe', value)
     },
     socket_questWinners (context, value) {
       context.commit('SET_QUEST_WINNERS', value)

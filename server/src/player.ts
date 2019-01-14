@@ -103,6 +103,7 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
         players: game.players,
         state: game.state,
         fails: game.fails,
+        size: (game.size !== undefined) ? game.size : {},
         questWinners: game.questWinners,
         currentAccepted: (game.state != undefined) ? game.state.answers : 0
       }

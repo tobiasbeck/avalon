@@ -1,11 +1,11 @@
 <template>
-  <div class="round-counter-container">
-    <div class="round-counter">
-      <round-counter-round :team="winners[0]" />
-      <round-counter-round :team="winners[1]"/>
-      <round-counter-round :team="winners[2]"/> 
-      <round-counter-round :team="winners[3]"/>
-      <round-counter-round :team="winners[4]"/>
+  <div :class="{['round-counter-container']: true, ['board-counter-container']: board}">
+    <div :class="{['round-counter']: true, ['board-counter']: board}">
+      <round-counter-round :board="board" :team="winners[0]" :size="size.quests[0].players" />
+      <round-counter-round :board="board" :team="winners[1]" :size="size.quests[1].players"/>
+      <round-counter-round :board="board" :team="winners[2]" :size="size.quests[2].players"/> 
+      <round-counter-round :board="board" :team="winners[3]" :size="size.quests[3].players"/>
+      <round-counter-round :board="board" :team="winners[4]" :size="size.quests[4].players"/>
     </div>
     <div class="fails">
     {{fails}}/5 Fails
@@ -16,6 +16,12 @@
 <script>
 import RoundCounterRound from './roundCounterRound'
 export default {
+  props: {
+    board: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {RoundCounterRound},
   computed: {
     winners () {
@@ -23,6 +29,9 @@ export default {
     },
     fails () {
       return this.$store.state.game.fails;
+    },
+    size () {
+      return this.$store.state.game.size;
     }
   }
 }
@@ -32,6 +41,14 @@ export default {
 .round-counter-container {
   display: fleX;
   flex-direction: row;
+  &.board-counter-container {
+    flex-direction: column;
+    .fails {
+      font-size:3em;
+      justify-content: center;
+      padding: 0px;
+    }
+  }
 }
   .round-counter {
     display: flex;

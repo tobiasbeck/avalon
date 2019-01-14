@@ -29,8 +29,6 @@ export class ChooseState extends State {
 
   init () {
     this.quest = this.game.size.quests[this.game.questWinners.length];
-    console.log(this.game.questWinners.length);
-    console.log(this.quest);
     this.maxChoosen = this.quest.players;
     this.state = GameState.CHOOSE;
     this.title="To our venerable and excellent king,";
