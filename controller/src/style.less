@@ -23,6 +23,7 @@
   border-image-source:url('./assets/text-border-roll.png');
   background-image: url('./assets/text-bg-roll.png');
   background-clip: padding-box;
+  transition: max-height 3s;
 }
 
 .text-pergament {
@@ -78,6 +79,7 @@
   font-family: 'Adolphus Serif';
   margin-top:4px;
   margin-bottom: 4px;
+  overflow: auto;
   .player-list-title {
     font-size:1.2em;
     font-weight: bold;
@@ -88,14 +90,17 @@
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
+
     &.single {
       justify-content: flex-start;
     }
-    .component-player{
-      font-size:1.2em;
-      margin:5px;
-      margin-left: 0px;
-      margin-right:12px;
+    &:not(.choose) {
+      .component-player{
+        font-size:1.2em;
+        margin:5px;
+        margin-left: 0px;
+        margin-right:12px;
+      }
     }
   }
 }
@@ -109,8 +114,10 @@
   font-size:1em;
 
   .title {
+    margin-top:2px;
     font-size:2em;
     font-family: 'Anir';
+    padding-bottom:12px;
   }
 
   .sub-title {
@@ -138,3 +145,17 @@
     }
   }
 }
+
+/*.roll-enter {
+ max-height: 0px;
+}
+.roll-enter-to {
+  max-height: 2000px;
+}
+.roll-leave {
+  max-height: 2000px;
+}
+
+.roll-leave-to {
+  max-height: 0px;
+}*/

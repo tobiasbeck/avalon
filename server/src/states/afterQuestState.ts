@@ -14,7 +14,7 @@ export class AfterQuestState extends OkState {
     this.result = {yes: 0, no: 0};
     this.result.yes = YesNoState.lastResult.filter(val => val.vote == 'yes').length;
     this.result.no = YesNoState.lastResult.filter(val => val.vote == 'no').length;
-    
+    //this.playerList = this.game.questPlayers.map(val => this.game.players[val]);
     if (this.game.lastStateResult == 'good') {
       this.title = 'Success';
       this.icon = 'quest_success';

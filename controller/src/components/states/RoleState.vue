@@ -1,12 +1,13 @@
 <template>
   <div class="role-state">
-    <div class="role-state-top text-cartoon">
+    <text-container class="role-state-top state-top" type="roll">
       <span class="title">{{gameState.title}}</span>
       <div class="role-container">
-        <role />
+        <role v-if="roleHidden == false " />
+        <p v-if="roleHidden == true ">You have already clicked Ok and therefore hidden your role, but you can still see it again by clicking on the <strong>My Character</strong> button on bottom</p>
       </div>
        
-    </div>
+    </text-container>
     <div class="role-state-bottom">
       <b-button block @click="yes()" size="lg" :disabled="answered" variant="bronze">Ok ({{answers}}/{{totalNeeded}})</b-button>
     </div>
@@ -15,14 +16,16 @@
 
 <script>
 import {StateMixin} from '../../mixins/StateMixin.js';
+import TextContainer from '../TextContainer';
 import Role from '../Role';
 export default {
   data () {
     return {
-      answered: false
+      answered: false,
+      roleHidden: false
     }
   },
-  components: { Role },
+  components: { Role, TextContainer },
   mixins: [StateMixin],
   computed: {
     answers () {
@@ -44,6 +47,7 @@ export default {
   methods: {
     yes () {
       this.answered = true;
+      this.roleHidden = true;
       this.$socket.emit('player-yes');
     }
   },
@@ -68,16 +72,16 @@ export default {
     font-size:1em;
     overflow:auto;
     overflow-x: hidden;
+    .title {
+      text-align: center;
+    }
     .role-container {
       display: flex;
       flex-direction: row;
       justify-content: center;
-    }
-    .title {
-      text-align: center;
-      padding-bottom:1em;
-      font-size:2.5em;
-      font-family: 'Anir';
+      p {
+        font-family: 'Adolphus Serif';
+      }
     }
     
     .description {

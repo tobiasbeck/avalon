@@ -13,7 +13,7 @@ export default new Vuex.Store({
     player: {
       id: -1,
       name: '',
-      role: undefined,
+      role: {},
       gameLeader: false
     },
     game: {
@@ -25,7 +25,7 @@ export default new Vuex.Store({
       size: {},
       questWinners: [],
       currentAccepted: 0,
-      state: {} // waitBeforeGame: Pre Game, select: Select Card, master: Answer Set Selection, wait*: Wait for Card
+      state: {}
     },
     settings: {
       allRoles: [],

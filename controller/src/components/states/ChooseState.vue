@@ -3,8 +3,10 @@
     <div class="choose-state-top text-cartoon">
       <span class="title" v-if="gameState.title != 'unknown'">{{gameState.title}}</span>
       <span class="description">Could you, <player :player="king" :inline="true"/> our allmighty king, choose a group of brave people that are worth going to the quest?</span>
-      <div class="player-list" v-if="playerList.length > 0">
+      <div class="player-list-container">
+      <div class="player-list choose" v-if="playerList.length > 0">
         <b-button block v-for="player in playerList" @click="choose(player)" :key="player.id" :disabled="!isKing" :variant="choosen.includes(player.id)? 'bronze' : 'secondary'"><Player :player="player" /></b-button>
+      </div>
       </div>
     </div>
     <div class="choose-state-bottom">
@@ -91,6 +93,7 @@ export default {
     font-family: 'Anrim';
     padding:12px;
     font-size:1em;
+    overflow:hidden;
     ul {
       .name {
         font-weight: bold;

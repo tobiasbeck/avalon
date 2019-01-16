@@ -27,7 +27,7 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
     this.name = name;
     this.connected = true;
 
-    if (this.name == 'Liisa' || this.name == 'Lisa') {
+    if (this.name == 'Liisa' || this.name == 'Lisa' || this.name == 'Lisbetti') {
       this.name = 'Hot Potatoe';
     } else if (knightName == true) {
       let add = this.getRandomTitle(gender);

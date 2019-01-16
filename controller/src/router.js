@@ -5,6 +5,7 @@ import Join from './views/Join.vue'
 import Game from './views/Game.vue'
 import End from './views/End.vue'
 import Board from './views/Board.vue'
+import Test from './views/Test.vue'
 
 Vue.use(Router)
 
@@ -14,6 +15,11 @@ export default new Router({
       path: '/',
       name: 'index',
       component: Welcome
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test
     },
     {
       path: '/join',

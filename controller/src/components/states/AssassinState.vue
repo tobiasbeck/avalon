@@ -95,7 +95,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-        
+  .description {
+    max-height:25%;
+  }
   padding: 20px;
   .player-list-evil {
     margin-bottom:25px;

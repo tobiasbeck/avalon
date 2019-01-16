@@ -157,7 +157,8 @@ export default class Game  extends EventEmitter{
       teams[char.team]++;
     }
     if (teams.evil < this.size.evils) {
-      for (let i = 0; i < (this.size.evils - teams.evil); i++) {
+      let minionCount = (this.size.evils - teams.evil);
+      for (let i = 0; i < minionCount; i++) {
         let char = CHARACTERS.find(val => (val.role == 'minion'));
         roles.push(char);
         teams[char.team]++;

@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Building Avalon Version Alpha 0.0.1";
+echo "Building Avalon Version Alpha 0.1.1";
 cd ./controller;
 echo "Building Controller";
 npm run build;
