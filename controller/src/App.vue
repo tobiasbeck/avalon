@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{screen: isScreen}">
+  <div id="app" :class="{screen: screenBackground}">
     <router-view/>
   </div>
 </template>
@@ -10,6 +10,14 @@ export default {
   mixins: [IsScreenMixin],
   created () {
     this.$store.commit('SET_SOCKET', this.$socket)
+  },
+  computed: {
+    screenBackground() {
+      if (this.isScreen && this.$store.state.game.id != '') {
+        return true;
+      }
+      return false;
+    }
   },
   sockets: {
     gameExit() {
@@ -97,7 +105,12 @@ html, body {
   position: fixed;
   z-index: -3;
   opacity: 0.6;
-  background: url('./assets/bg.jpg');
+  background-image: url('./assets/bg.jpg');
+}
+#app.screen:before {
+  background-image: url('./assets/bg-board.jpg');
+  background-position: center center;
+  filter: blur(2px);
 }
 #app {
   font-family: 'Adolphus Serif', Helvetica, Arial, sans-serif;
