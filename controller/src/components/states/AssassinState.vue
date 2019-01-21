@@ -2,8 +2,8 @@
   <div class="assassin-state">
     <div class="state-top text-cartoon">
       <h2 class="sub-title">{{gameState.title}}</h2>
-      <span class="description">The time has come, and our kingdom is nearly safe! But there are betrayers in our lines!<br>
- They have sent <player :inline="true" :player="king"/> to kill Merlin and to cross trough our plans! If they manage to kill Merlin the betrayer win!</span>
+      <span class="description">The kingdom is nearly safe! But there are betrayers in our lines!<br>
+ They have sent <player :inline="true" :player="king"/> to kill Merlin! If they manage to kill Merlin the betrayer win!</span>
 
     <div class="player-list-container player-list-evil" v-if="evil.length > 0">
       <h3 class="player-list-title">The betrayers:</h3>

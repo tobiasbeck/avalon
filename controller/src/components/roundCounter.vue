@@ -1,11 +1,11 @@
 <template>
   <div :class="{['round-counter-container']: true, ['board-counter-container']: board}">
     <div :class="{['round-counter']: true, ['board-counter']: board}">
-      <round-counter-round :board="board" :team="winners[0]" :size="size.quests[0].players" />
-      <round-counter-round :board="board" :team="winners[1]" :size="size.quests[1].players"/>
-      <round-counter-round :board="board" :team="winners[2]" :size="size.quests[2].players"/> 
-      <round-counter-round :board="board" :team="winners[3]" :size="size.quests[3].players"/>
-      <round-counter-round :board="board" :team="winners[4]" :size="size.quests[4].players"/>
+      <round-counter-round :board="board" :team="winners[0]" :size="size.quests[0]" />
+      <round-counter-round :board="board" :team="winners[1]" :size="size.quests[1]"/>
+      <round-counter-round :board="board" :team="winners[2]" :size="size.quests[2]"/> 
+      <round-counter-round :board="board" :team="winners[3]" :size="size.quests[3]"/>
+      <round-counter-round :board="board" :team="winners[4]" :size="size.quests[4]"/>
     </div>
     <div class="fails">
     {{fails}}/5 Fails

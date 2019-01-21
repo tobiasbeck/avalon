@@ -1,7 +1,7 @@
 <template>
   <div class="board-quest-result-state">
     <div class="board-quest-result-state-inner text-cartoon">
-      <img class="state-icon" :src="'/icons/' + gameState.icon + '.svg'">
+      <div><img class="state-icon" :src="'/icons/' + gameState.icon + '.svg'"></div>
       <div class="quest-result-text"><h1 class="title" v-if="gameState.title != 'unknown'">{{gameState.title}}</h1>
       <div class="result-container">
         <b-table class="result" hover :items="result" bordered head-variant="light">
@@ -43,6 +43,9 @@ export default {
   justify-content: center;
   align-items: center;
   .board-quest-result-state-inner {
+    > div {
+      flex-grow: 1;
+    }
     display: flex;
     flex-direction: row;
     min-width:500px;

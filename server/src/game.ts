@@ -46,7 +46,7 @@ export default class Game  extends EventEmitter{
 
   setGameEvents () {
     this.gameSocket.on('settings-character', (data) => {
-     
+      this.state.choose(null, data);
     });
     this.gameSocket.on('game-start', () => {
       this.startGame();

@@ -6,6 +6,7 @@ import Game from './views/Game.vue'
 import End from './views/End.vue'
 import Board from './views/Board.vue'
 import Test from './views/Test.vue'
+import TestBoard from './views/TestBoard.vue'
 
 Vue.use(Router)
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/test',
       name: 'test',
       component: Test
+    },
+    {
+      path: '/testboard',
+      name: 'test',
+      component: TestBoard
     },
     {
       path: '/join',

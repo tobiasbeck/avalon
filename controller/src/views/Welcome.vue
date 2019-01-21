@@ -23,7 +23,7 @@
       </div>
     </transition>
     </div>
-    <div class="version">Alpha 0.1.1</div>
+    <div class="version">Alpha 0.1.2</div>
   </div>
 </template>
 
@@ -79,7 +79,7 @@ export default {
       this.$router.push("/join");
     },
     test () {
-      this.$router.push("/test");
+      this.$router.push("/testboard");
     },
     create(gamefield) {
       if (gamefield == false) {

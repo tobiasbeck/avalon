@@ -3,11 +3,11 @@
     <div class="character-container">
         <b-container class="">
           <b-row>
-              <b-col  v-for="c of characters" sm="12" md="6" lg="4" xl="3">
-                <b-card  class="character text-roll" :title="c.name" :key="c.role" :img-src="'/roles/' + c.role + '.svg'" img-top>
+              <b-col  v-for="c of characters" :key="c.role" sm="12" md="6" lg="4" xl="3">
+                <b-card  class="character text-roll" :title="c.name" :img-src="'/roles/' + c.role + '.svg'" img-top>
                   <div class="card-text">
                     <div class="descr" v-html="c.description"></div>
-                    <b-button @click="toggle(c.role)" :disabled="!me.gameLeader" :variant="enabledRoles.includes(c.role)? 'bronze':'secondary'" block><span v-if="!enabledRoles.includes(c.role)">Disabled</span> <span v-if="enabledRoles.includes(c.role)">Enabled</span></b-button>
+                    <b-button @click="toggle(c.role)" :disabled="!selectable" :variant="enabledRoles.includes(c.role)? 'bronze':'secondary'" block><span v-if="!enabledRoles.includes(c.role)">Disabled</span> <span v-if="enabledRoles.includes(c.role)">Enabled</span></b-button>
                   </div>
                 </b-card>
               </b-col>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import {IsScreenMixin} from '../mixins/IsScreenMixin.js';
 export default {
   props: {
     enabledRoles: {
@@ -26,12 +27,22 @@ export default {
       default:  () => []
     }
   },
+  mixins: [IsScreenMixin],
   computed: {
     characters () {
       return this.$store.state.game.state.allRoles.filter(val => val.default !== true);
     },
     me () {
       return this.$store.state.player
+    },
+    selectable () {
+      if (this.me.gameLeader) {
+        return true;
+      }
+      if (this.isScreen == true) {
+        return true;
+      }
+      return false;
     }
   },
   methods: {

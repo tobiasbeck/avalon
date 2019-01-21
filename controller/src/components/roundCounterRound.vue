@@ -1,6 +1,7 @@
 <template>
   <div :class="{['round-counter-round']: true, 'evil': team == 'evil', 'good': team == 'good', ['board-counter-round']: board}">
-    <span class="size" v-if="board">{{size}}</span>
+    <span class="size" v-if="board">{{size.players}}</span>
+    <span class="round-fails text-muted" v-if="board && size.fails > 1">{{size.fails}} Fails</span>
   </div>
 </template>
 
@@ -26,7 +27,7 @@ export default {
 <style lang="less">
 .round-counter-round {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border:1px black solid;
@@ -38,6 +39,10 @@ export default {
   .size {
     transition: color 0.4s;
     font-size:3em;
+  }
+  .round-fails {
+    font-size: 1.5em;
+    line-height: 0em;
   }
   &.board-counter-round {
     width: 140px;

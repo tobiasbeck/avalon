@@ -47,7 +47,7 @@ export class GameEmitter extends (EventEmitter as { new(): StrictEventEmitter<Ev
   }
 
   setSocketEvents () {
-    this.socket.on('settings-character', (data) => {
+    this.socket.on('player-choose', (data) => {
       this.emit('settings-character', data);
     });
     this.socket.on('game-start', () => {
