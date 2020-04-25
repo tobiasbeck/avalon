@@ -58,7 +58,7 @@ export default class Player extends (EventEmitter as { new(): StrictEventEmitter
     });
 
     this.socket.on('player-choose', (data) => {
-      this.emit('player-choose', data);
+      // this.emit('player-choose', data);
     });
     
   }
